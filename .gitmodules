@@ -1,3 +1,6 @@
 [submodule "airbnb-back"]
 	path = airbnb-back
 	url = git@github.com:jvmxgs/airbnb-back.git
+[submodule "airbnb-front"]
+	path = airbnb-front
+	url = git@github.com:jvmxgs/airbnb-front.git
