@@ -1,16 +1,31 @@
 version: "3.9"
 services:
+  airbnb-front:
+    container_name: airbnb-front
+    build:
+      context: ./airbnb-front
+      dockerfile: Dockerfile
+    restart: always
+    privileged: true
+    tty: true
+    working_dir: /var/www
+    volumes:
+       - ./airbnb-front:/var/www
+       - /var/www/node_modules
+    expose:
+      - "3000"
+    networks:
+      - airbnb-network
   airbnb-back:
     container_name: airbnb-back
     build:
       context: ./airbnb-back
       dockerfile: Dockerfile
-    restart: unless-stopped
+    restart: always
     privileged: true
     tty: true
-    #depends_on:
-      #- airbnb-redis
-      #- airbnb-db
+    depends_on:
+      - airbnb-mongodb
     working_dir: /var/www
     volumes:
        - ./airbnb-back:/var/www
@@ -26,9 +41,8 @@ services:
     restart: unless-stopped
     ports:
       - "27017:27017"
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: admin
-      MONGO_INITDB_ROOT_PASSWORD: secret
+    expose:
+      - "27017"
     volumes:
       - dbdata:/data/db
     networks:
@@ -40,27 +54,16 @@ services:
     restart: unless-stopped
     tty: true
     ports:
-      #- "80:80"
-      #- "443:443"
+      - "8080:8080"
       - "3000:3000"
     depends_on: 
       - airbnb-back
       #- airbnb-front
     volumes:
-      #- ./airbnb-back/public:/var/www/public
       #- ./airbnb-front/public:/app
       - ./nginx/conf.d/:/etc/nginx/conf.d/
     networks:
       - airbnb-network
-
-  #airbnb-redis:
-    #image: redis:7.0.1-alpine
-    #container_name: airbnb-redis
-    #tty: true
-    #ports:
-    #  - "6380:6379"
-    #networks:
-    #  - airbnb-network
 
 networks:
   airbnb-network:
