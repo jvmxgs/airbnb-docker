@@ -39,7 +39,7 @@ Before you begin, ensure you have the following installed:
     git checkout main
     ```
 
-5. Copy the example environment file and configure it with your SMTP credentials. You can create an account at [ethereal.email](https://ethereal.email) and use their SMTP service for testing:
+5. Copy the example environment file and configure it with your SMTP credentials.
 
     ```bash
     cp .env.example .env
@@ -53,6 +53,7 @@ Before you begin, ensure you have the following installed:
     SMTP_USERNAME=sincere32@ethereal.email
     SMTP_PASSWORD=WDuARawQgPV7gMg3hw
     ```
+    You can create an account at [ethereal.email](https://ethereal.email) and use their SMTP service for testing:
 
 6. Return to the main project directory:
 
