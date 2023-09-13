@@ -29,6 +29,7 @@ Before you begin, ensure you have the following installed:
     ```bash
     cd airbnb-front
     git checkout main
+    cp .env.local.example .env.local
     cd ../
     ```
 
